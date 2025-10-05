@@ -9,8 +9,8 @@ app.use(express.json());
 
 const messageSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  profileUrl: String,
-  content: { type: String, required: true },
+  profile: String,
+  chat: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -18,10 +18,10 @@ const Message = mongoose.model('Message', messageSchema);
 
 app.post('/api/messages', async (req, res) => {
   try {
-    const { name, profileUrl, content } = req.body;
-    if (!name || !content) return res.status(400).json({ error: 'نام و متن پیام لازم است' });
+    const { name, profile, chat } = req.body;
+    if (!name || !chat) return res.status(400).json({ error: 'نام و پیام (chat) لازم است' });
 
-    const msg = new Message({ name, profileUrl, content });
+    const msg = new Message({ name, profile, chat });
     await msg.save();
 
     res.status(201).json({ message: 'پیام ارسال شد', data: msg });
