@@ -1,1 +1,1 @@
-test
+curl -o index.html https://raw.githubusercontent.com/radvungh-creator/Server_rg/main/Ender && python3 -m http.server 8000
